@@ -66,15 +66,6 @@ SYNOPSIS
 
       my $obj = My::Class->new( public_attr => 'fish' );
 
-
-INSTALLATION
-    To install this module type the following:
-
-       perl Makefile.PL
-       make
-       make test
-       make install
-   
 MOTIVATION
     One of Perl's greatest strengths is it's flexible object model. You can
     turn anything (so long as it's a reference, or you can get a reference
@@ -892,14 +883,13 @@ DESCRIPTION
             and defaults to 4 spaces.
 
         *backtrace*
-            If *backtrace* is true, the *dump()* will back-trace references
-            if they are encountered multiple times in the generation of
-            the *dump()* output. The back-trace is similar to the default
-            behaviour of Data::Dumper, where only the first instance
-            of a reference is shown in full, and all other occurences are
+            If *backtrace* is true, the dump() will back-trace references if
+            they are encountered multiple times in the generation of the
+            dump() output. The back-trace is similar to the default
+            behaviour of Data::Dumper, where only the first instance of a
+            reference is shown in full, and all other occurences are
             displayed as a link back to the original occurrence of that
             reference. By default, *backtrace* is true.
-
 
         If an attribute type parameter, such as *static* or *private*, is
         set in the call to dump() then this only has effect on the target
@@ -909,21 +899,21 @@ DESCRIPTION
     hash( [ *param* => *value* ] )
         Return a hash representing the values of the attributes of the class
         or object (depending on how hash() is called. hash() supports the
-        same calling parameters as dump(), except for "friends" and "indent".
-        hash() observes normal access control, only returning attributes that
-        the caller would normally have access to. "abstract" attributes are
-        returned with a value of "undef".
+        same calling parameters as dump(), except for "friends" and
+        "indent"). hash() observes normal access control, only returning
+        attributes that the caller would normally have access to. "abstract"
+        attributes are returned with a value of "undef".
 
         If called in a list context, hash() will return a hash, otherwise a
         hash reference is returned.
 
-        Note: As of v0.10, hash() supports the "depth" parameter, and will,
-        by default, recurse to generate a hash of the entire object tree
-        (if derived from Class::Declare). If "depth" is set, then "hash()"
-        will limit it's output to the given recursive depth. A depth of 0
-        will display the target's attributes, but will not expand those
-        attribute values. hash() will descend ARRAY and HASH references if
-        asked to recurse.
+        Note: As of v0.10, hash() supports the *depth* parameter, and will,
+        by default, recurse to generate a hash of the entire object tree (if
+        derived from Class::Declare). If *depth* is set, then *hash()* will
+        limit it's output to the given recursive depth. A depth of 0 will
+        display the target's attributes, but will not expand those attribute
+        values. hash() will descend "ARRAY" and "HASH" references if asked
+        to recurse.
 
     arguments( *args* => *default* )
         A class helper method for handling named argument lists. In Perl,
@@ -1010,18 +1000,23 @@ DESCRIPTION
           use strict;
           use base qw( Class::Declare );
           use vars qw( $REVISION      );
-                       $REVISION = '$Revision: 1514 $';
+                       $REVISION = '$Revision: 1518 $';
 
           ...
 
           1;
 
+
           print My::Class->REVISION;  # prints the revision number
 
-    VERSION()
+    VERSION( [ *required* ] )
         Replacement for UNIVERSAL::VERSION(), that falls back to REVISION()
         to report the CVS revision number as the version number if the
-        package variable $VERSION is not defined.
+        package variable $VERSION is not defined. If *required* is given,
+        then VERSION() will die if the *required* version is not less than
+        or equal to the current package version (or revision, if VERSION()
+        falls back to REVISION()). VERSION() will die if *required* is not a
+        valid version string.
 
     has( *method* )
         If this class directly implements the given *method*(), then return
