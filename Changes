@@ -1,5 +1,8 @@
 Revision history for Perl module Class::Declare
-$Id: Changes 1518 2010-08-22 23:56:21Z ian $
+
+0.18  Tue Aug  4 12:01:45 2015
+  - corrected Class::Declare::Dump tests for more recent Perl versions
+  - corrected Class::Declare::VERSION() to correctly support required versions
 
 0.17  Mon Aug 23 00:49:12 2010
   - changed $VERSION definition in Class::Declare::Dump and Class::Declare::Hash

@@ -4,6 +4,7 @@
 package Class::Declare;
 
 use strict;
+use version;
 
 =head1 NAME
 
@@ -80,11 +81,10 @@ attributes and methods.
 
 
 use base qw( Exporter );
-use vars qw/ $VERSION $REVISION @EXPORT_OK %EXPORT_TAGS /;
+use vars qw/ $VERSION @EXPORT_OK %EXPORT_TAGS /;
 
 # the version of this module
-             $VERSION = '0.17';
-            $REVISION = '$Revision: 1518 $';
+             $VERSION = '0.18';
 
 # declare the read-write and read-only methods for export
 @EXPORT_OK    = qw( rw ro );
@@ -2243,22 +2243,59 @@ sub REVISION
 } # REVISION()
 
 
-=item B<VERSION(>B<)>
+=item B<VERSION(> [ I<required> ] B<)>
 
 Replacement for B<UNIVERSAL::VERSION()>, that falls back to B<REVISION()>
 to report the CVS revision number as the version number if the package
-variable C<$VERSION> is not defined.
+variable C<$VERSION> is not defined. If I<required> is given, then
+B<VERSION()> will die if the I<required> version is not less than or equal
+to the current package version (or revision, if B<VERSION()> falls back to
+B<REVISION()>). B<VERSION()> will die if I<required> is not a valid version
+string.
 
 =cut
-sub VERSION
+sub VERSION(;$)
 {
   my  $self       = __PACKAGE__->class( shift );
 
-  # extract the normal version information (if it exists)
+  # extract the package version (if it exists)
+  #   - fallback to the REVISION if there's no version
   my  $version    = $self->SUPER::VERSION;
-  # if the version number isn't defined, then return the REVISION
-  # number (which might not be defined, also)
-  return ( defined $version ) ? $version : $self->REVISION;
+      $version    = $self->REVISION             if ( ! defined $version );
+      $version    = version->parse( $version )  if (   defined $version );
+
+  # have we been given a required version?
+  if ( defined $_[0] ) {
+    # where have we been called from?
+    #   - we use this to ensure any die() message correctly reflects the
+    #     location of the cause of the failure
+    my    $class                    = ref( $self ) || $self;
+    my  ( undef , $file , $line )   = caller 0;
+
+    # do we have version for this pacakge?
+    #   - if we don't, then we cannot support the required version
+        ( defined $version )
+    or die $class . ' does not define $' . $class . '::VERSION' .
+          "--version check failed at $file line $line\n";
+
+    # attempt to parse the required version
+    my    $required                 = eval { version->parse( $_[0] ) };
+    if ( $@ ) {
+      my    $msg    = ( $@ =~ /(.*) at \S+ line \d+/ )[0];
+
+      # terminate with an appropriate error message
+      #   - we ensure the report the line with the bad version
+      die $msg . " at " . $file . " line " . $line . "\n";
+    }
+
+    # is the package version/revision as required?
+    ( $required <= $version )
+      or die "$class version $required required--this is only version $version "
+             . "at $file line $line\n";
+  }
+
+  # return the package version
+  return ( defined $version ) ? $version->stringify() : undef;
 } # VERSION()
 
 
