@@ -110,7 +110,7 @@ qr#^Test::Dump::(?:One|Two)=SCALAR\(0x[a-f\d]+\)
     class:
         my_class    = 1
     public:
-        my_public   = { 'key' => 'value' }
+        my_public   = \{ 'key' => 'value' \}
 $# ,
 
     # class, restricted, public & protected only
@@ -123,7 +123,7 @@ qr#^Test::Dump::(One|Two)=SCALAR\(0x([a-f\d]+)\)
     restricted:
         my_restricted = \[ 1, 2, 3, 4 \]
     public:
-        my_public     = { 'key' => 'value' }
+        my_public     = \{ 'key' => 'value' \}
     protected:
         my_protected  = Test::Dump::\1=SCALAR\(0x\2\)->my_public
 $# ,
@@ -140,7 +140,7 @@ qr#^Test::Dump::(One|Two)=SCALAR\(0x([a-f\d]+)\)
     restricted:
         my_restricted = \[ 1, 2, 3, 4 \]
     public:
-        my_public     = { 'key' => 'value' }
+        my_public     = \{ 'key' => 'value' \}
     private:
         my_private    = undef
     protected:
@@ -448,7 +448,7 @@ qr#^Test::Dump::Five
                      class:
                          my_class    = 1
                      public:
-                         my_public   = { 'key' => 'value' }
+                         my_public   = \{ 'key' => 'value' \}
 $# ,
 
     # unrelated instance
@@ -461,7 +461,7 @@ qr#^Test::Dump::Five=SCALAR\(0x[a-f\d]+\)
                      class:
                          my_class    = 1
                      public:
-                         my_public   = { 'key' => 'value' }
+                         my_public   = \{ 'key' => 'value' \}
 $# ,
 
     # friend class/object
@@ -478,7 +478,7 @@ qr#^(Test::Dump::Five(?:=SCALAR\(0x[a-f\d]+\))?)
                      restricted:
                          my_restricted = \[ 1, 2, 3, 4 \]
                      public:
-                         my_public     = { 'key' => 'value' }
+                         my_public     = \{ 'key' => 'value' \}
                      private:
                          my_private    = undef
                      protected:
@@ -673,7 +673,7 @@ qr#Test::Dump::Six=SCALAR\(0x[a-f\d]+\)
                         class:
                             my_class    = 1
                         public:
-                            my_public   = { 'key' => 'value' }
+                            my_public   = \{ 'key' => 'value' \}
 #;
     ok( $dump =~ $result , "dump() returns limited results as requested" );
 
@@ -690,7 +690,7 @@ qr#(Test::Dump::Six=SCALAR\(0x[a-f\d]+\))
                          class:
                              my_class    = 1
                          public:
-                             my_public   = { 'key' => 'value' }
+                             my_public   = \{ 'key' => 'value' \}
     static:
         my_static  = \1->my_class
     private:
@@ -700,7 +700,7 @@ qr#(Test::Dump::Six=SCALAR\(0x[a-f\d]+\))
                          class:
                              my_class    = 1
                          public:
-                             my_public   = { 'key' => 'value' }
+                             my_public   = \{ 'key' => 'value' \}
 #;
     ok( $dump =~ $result , "dump() returns limited results as requested" );
 
@@ -718,7 +718,7 @@ qr#Test::Dump::Six=SCALAR\(0x[a-f\d]+\)
                          class:
                              my_class    = 1
                          public:
-                             my_public   = { 'key' => 'value' })
+                             my_public   = \{ 'key' => 'value' \})
     static:
         my_static  = \1
     private:
@@ -728,7 +728,7 @@ qr#Test::Dump::Six=SCALAR\(0x[a-f\d]+\)
                          class:
                              my_class    = 1
                          public:
-                             my_public   = { 'key' => 'value' }
+                             my_public   = \{ 'key' => 'value' \}
 #;
     ok( $dump =~ $result , "dump() ignored back-traces as requested" );
 
@@ -744,7 +744,7 @@ qr#Test::Dump::Six=SCALAR\(0x[a-f\d]+\)
                class:
                 my_class    = 1
                public:
-                my_public   = { 'key' => 'value' }
+                my_public   = \{ 'key' => 'value' \}
  public:
   my_public = Test::Dump::One=SCALAR\(0x[a-f\d]+\)
                abstract:
@@ -752,7 +752,7 @@ qr#Test::Dump::Six=SCALAR\(0x[a-f\d]+\)
                class:
                 my_class    = 1
                public:
-                my_public   = { 'key' => 'value' }
+                my_public   = \{ 'key' => 'value' \}
 #;
     ok( $dump =~ $result , "dump() honours indentation" );
 
@@ -852,7 +852,7 @@ qr#Test::Dump::Nine=SCALAR\(0x[a-f\d]+\)
                                            class:
                                             my_class    = 1
                                            public:
-                                            my_public   = { 'key' => 'value' }
+                                            my_public   = \{ 'key' => 'value' \}
                              public:
                               my_public = Test::Dump::One=SCALAR\(0x[a-f\d]+\)
                                            abstract:
@@ -860,7 +860,7 @@ qr#Test::Dump::Nine=SCALAR\(0x[a-f\d]+\)
                                            class:
                                             my_class    = 1
                                            public:
-                                            my_public   = { 'key' => 'value' }
+                                            my_public   = \{ 'key' => 'value' \}
 # ,
 
 # limit the depth to 0
