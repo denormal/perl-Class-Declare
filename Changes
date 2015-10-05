@@ -1,5 +1,8 @@
 Revision history for Perl module Class::Declare
 
+0.19  Mon Oct  5 15:39:21 2015
+  - corrected regex tests for more recent Perl versions
+
 0.18  Tue Aug  4 12:01:45 2015
   - corrected Class::Declare::Dump tests for more recent Perl versions
   - corrected Class::Declare::VERSION() to correctly support required versions
