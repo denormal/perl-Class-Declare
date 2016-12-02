@@ -21,7 +21,7 @@ use base  qw( Class::Declare     );
 use vars  qw( $REVISION $VERSION );
 
   $REVISION = '$Revision: 1518 $';
-  $VERSION  = '0.19.1';	# Class::Declare->VERSION;
+  $VERSION  = '0.20';	# Class::Declare->VERSION;
 
 
 =head1 DESCRIPTION
