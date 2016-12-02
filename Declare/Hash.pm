@@ -21,7 +21,7 @@ use base  qw( Class::Declare     );
 use vars  qw( $REVISION $VERSION );
 
   $REVISION = '$Revision: 1518 $';
-  $VERSION  = '0.17';	# Class::Declare->VERSION;
+  $VERSION  = '0.19.1';	# Class::Declare->VERSION;
 
 
 =head1 DESCRIPTION
@@ -453,11 +453,11 @@ L<Class::Declare>
 
 =head1 AUTHOR
 
-Ian Brayshaw, E<lt>ian@onemore.orgE<gt>
+Ian Brayshaw, E<lt>ibb@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2003-2010 by Ian Brayshaw. All rights reserved.
+Copyright 2003-2016 by Ian Brayshaw. All rights reserved.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 

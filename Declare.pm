@@ -84,7 +84,7 @@ use base qw( Exporter );
 use vars qw/ $VERSION @EXPORT_OK %EXPORT_TAGS /;
 
 # the version of this module
-             $VERSION = '0.19';
+             $VERSION = '0.19.1';
 
 # declare the read-write and read-only methods for export
 @EXPORT_OK    = qw( rw ro );
@@ -2385,12 +2385,12 @@ L<Storable>, L<perlboot>, L<perltoot>.
 
 =head1 AUTHOR
 
-Ian Brayshaw, E<lt>ian@onemore.orgE<gt>
+Ian Brayshaw, E<lt>ibb@cpan.orgE<gt>
 
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2003-2010 Ian Brayshaw. All rights reserved.
+Copyright 2003-2016 Ian Brayshaw. All rights reserved.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 
